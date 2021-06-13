@@ -35,4 +35,10 @@ public class Toebehoren {
     this.omschrijving = omschrijving;
   }
 
+  @Override
+  public String toString() {
+    return "Toebehoren [model=" + model + ", serienummer=" + serienummer + ", omschrijving=" + omschrijving + "]";
+  }
+
+  
 }

@@ -10,27 +10,26 @@ public final class AquariumManager {
   private ArrayList<Bewoner> bewonerLijst = new ArrayList<>();
   private ArrayList<Aquarium> aquariumLijst = new ArrayList<>();
 
-  private AquariumManager(String installatieNaam) {
-    this.installatieNaam = installatieNaam;
+  private AquariumManager() {
   }
-  
-  public static AquariumManager getInstance(String installatieNaam) {
-    if(INSTANCE == null) {
-        INSTANCE = new AquariumManager(installatieNaam);
+
+  public static AquariumManager getInstance() {
+    if (INSTANCE == null) {
+      INSTANCE = new AquariumManager();
     }
-    
+
     return INSTANCE;
-}
-  
+  }
+
   public ArrayList<Eigenaar> getEigenaarLijst() {
     return this.eigenaarLijst;
   }
-  
-  public ArrayList<Bewoner> getBewonerLijst(){
+
+  public ArrayList<Bewoner> getBewonerLijst() {
     return this.bewonerLijst;
   }
-  
-  public ArrayList<Toebehoren> getToebehorenLijst(){
+
+  public ArrayList<Toebehoren> getToebehorenLijst() {
     return this.toebehorenLijst;
   }
 
@@ -57,11 +56,11 @@ public final class AquariumManager {
       this.aquariumLijst.add(aquarium);
     }
   }
-  
+
   public void verwijderAquarium(Aquarium aquarium) {
     Aquarium aquariumToRemove = null;
     boolean removeAquarium = false;
-    
+
     for (Aquarium a : aquariumLijst) {
       if (a.getNaam().equals(aquarium.getNaam())) {
         removeAquarium = true;
@@ -89,14 +88,14 @@ public final class AquariumManager {
   public void verwijderToebehoren(Toebehoren toebehoren) {
     Toebehoren toebehorenToRemove = null;
     boolean removeToebehoren = false;
-    
+
     for (Toebehoren t : toebehorenLijst) {
       if (t.getSerienummer() == toebehoren.getSerienummer()) {
         removeToebehoren = true;
         toebehorenToRemove = t;
       }
     }
-    
+
     if (removeToebehoren) {
       toebehorenLijst.remove(toebehorenToRemove);
     }
@@ -118,14 +117,14 @@ public final class AquariumManager {
   public void verwijderEigenaar(Eigenaar eigenaar) {
     Eigenaar eigenaarToRemove = null;
     boolean removeEigenaar = false;
-    
+
     for (Eigenaar e : eigenaarLijst) {
       if (e.getVoornaam().equals(eigenaar.getVoornaam()) && e.getAchternaam().equals(eigenaar.getAchternaam())) {
         removeEigenaar = true;
         eigenaarToRemove = e;
       }
     }
-    
+
     if (removeEigenaar) {
       eigenaarLijst.remove(eigenaarToRemove);
     }
@@ -147,14 +146,14 @@ public final class AquariumManager {
   public void verwijderBewoner(Bewoner bewoner) {
     Bewoner bewonerToRemove = null;
     boolean removeBewoner = false;
-    
+
     for (Bewoner b : bewonerLijst) {
       if (b.getSoortNaam().equals(bewoner.getSoortNaam())) {
         removeBewoner = true;
         bewonerToRemove = b;
       }
     }
-    
+
     if (removeBewoner) {
       bewonerLijst.remove(bewonerToRemove);
     }

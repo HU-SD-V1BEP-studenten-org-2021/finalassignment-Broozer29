@@ -18,7 +18,7 @@ public class JunitTestSuite {
   void testEigenaar() {
     //Test het maken van een eigenaar. Voeg hem 2x toe en controleer of hij maar 1x in de lijst staat.
     Eigenaar nieuweEigenaar = new Eigenaar("Bruus", "Riezebos");
-    AquariumManager am = AquariumManager.getInstance("AquariumManager");
+    AquariumManager am = AquariumManager.getInstance();
     
     am.voegEigenaarToe(nieuweEigenaar);
     am.voegEigenaarToe(nieuweEigenaar);
@@ -33,7 +33,7 @@ public class JunitTestSuite {
   void testBewoner() {
     //Test het aanmaken van een bewoner. Voeg hem 2x toe en controleer of hij maar 1x in de lijst staat met een aantal van 2
     Bewoner nieuweBewoner = new Bewoner("Soortnaam", "Kleurnaam", 1, true, "type");
-    AquariumManager am = AquariumManager.getInstance("AquariumManager");
+    AquariumManager am = AquariumManager.getInstance();
     
     am.voegBewonerToe(nieuweBewoner);
     am.voegBewonerToe(nieuweBewoner);
@@ -50,7 +50,7 @@ public class JunitTestSuite {
   void testToebehoren() {
     //Test het aanmaken van een toebehoren. Voeg hem 2x toe en controleer of hij maar 1x in de lijst staat.
     Toebehoren nieuweToebehoren = new Toebehoren("Model", 1, "Omschrijving");
-    AquariumManager am = AquariumManager.getInstance("AquariumManager");
+    AquariumManager am = AquariumManager.getInstance();
     
     am.voegToebehorenToe(nieuweToebehoren);
     am.voegToebehorenToe(nieuweToebehoren);
@@ -72,7 +72,7 @@ public class JunitTestSuite {
   void testAquarium(){
     //Test het aanmaken van een aquarium. Voeg hem 2x toe en controleer of hij maar 1x in de lijst staat.
     Aquarium nieuwAquarium = new Aquarium("Naam", 10, 10, 10, "bodemsoort", "watersoort");
-    AquariumManager am = AquariumManager.getInstance("AquariumManager");
+    AquariumManager am = AquariumManager.getInstance();
     
     am.voegAquariumToe(nieuwAquarium);
     am.voegAquariumToe(nieuwAquarium);
@@ -89,7 +89,7 @@ public class JunitTestSuite {
   @Test
   void testAquariumBekijken() {
     Aquarium nieuwAquarium = new Aquarium("Naam", 10, 10, 10, "bodemsoort", "watersoort");
-    AquariumManager am = AquariumManager.getInstance("AquariumManager");
+    AquariumManager am = AquariumManager.getInstance();
     am.voegAquariumToe(nieuwAquarium);
     
     Bewoner nieuweBewoner = new Bewoner("Soortnaam", "Kleurnaam", 1, true, "type");

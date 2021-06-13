@@ -45,4 +45,10 @@ public class Ornament {
     this.kanOpLuchtPomp = kanUpLuchtPomp;
   }
 
+  @Override
+  public String toString() {
+    return "Ornament [naam=" + naam + ", omschrijving=" + omschrijving + ", kleur=" + kleur + ", kanOpLuchtPomp=" + kanOpLuchtPomp + "]";
+  }
+
+  
 }

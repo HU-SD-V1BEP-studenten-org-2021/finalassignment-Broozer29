@@ -121,4 +121,11 @@ public class Aquarium {
     }
   }
 
+  @Override
+  public String toString() {
+    return "Aquarium [naam=" + naam + ", lengte=" + lengte + ", breedte=" + breedte + ", hoogte=" + hoogte + ", bodemsoort=" + bodemsoort + ", watersoort="
+        + watersoort + ", ornamentenLijst=" + ornamentenLijst + ", bewonerLijst=" + bewonerLijst + ", toebehorenLijst=" + toebehorenLijst + "]";
+  }
+
+  
 }

@@ -55,4 +55,9 @@ public class Bewoner {
     this.type = type;
   }
 
+  @Override
+  public String toString() {
+    return "Bewoner [soortNaam=" + soortNaam + ", kleurNaam=" + kleurNaam + ", aantal=" + aantal + ", groepsDier=" + groepsDier + ", type=" + type + "]";
+  }
+
 }

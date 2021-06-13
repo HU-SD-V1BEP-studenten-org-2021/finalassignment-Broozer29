@@ -33,6 +33,11 @@ public class Eigenaar {
   public void setAquarium(Aquarium aquarium) {
     this.aquarium = aquarium;
   }
+
+  @Override
+  public String toString() {
+    return "Eigenaar [voornaam=" + voornaam + ", achternaam=" + achternaam + ", aquarium=" + aquarium + "]";
+  }
   
   
 }
