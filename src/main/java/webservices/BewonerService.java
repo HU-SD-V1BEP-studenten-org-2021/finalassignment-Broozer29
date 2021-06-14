@@ -9,18 +9,19 @@ import javax.json.JsonReader;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 import model.Aquarium;
 import model.AquariumManager;
 import model.Bewoner;
 
 @Path("/bewoner")
-public class BewonerDAO {
+public class BewonerService {
 
   @POST
   @Produces("application/json")
-  public String createBewoner(String jsonBody) {
-    JsonObjectBuilder responseObject = Json.createObjectBuilder();
+  public Response createBewoner(String jsonBody) {
+    Bewoner newBewoner = null;
     try {
       StringReader strReader = new StringReader(jsonBody);
       JsonReader jsonReader = Json.createReader(strReader);
@@ -33,19 +34,18 @@ public class BewonerDAO {
       String bType = jsonObject.getString("bType");
       String aquariumNaam = jsonObject.getString("aqNaam");
 
-      Bewoner bewoner = new Bewoner(bSoortnaam, bKleurnaam, bAantal, bGroepsdier, bType);
+      newBewoner = new Bewoner(bSoortnaam, bKleurnaam, bAantal, bGroepsdier, bType);
       AquariumManager am = AquariumManager.getInstance();
       for (Aquarium aq : am.getAquariumLijst()) {
         if (aq.getNaam().equals(aquariumNaam)) {
-          aq.voegBewonerToe(bewoner);
-          am.voegBewonerToe(bewoner);
+          aq.voegBewonerToe(newBewoner);
+          am.voegBewonerToe(newBewoner);
         }
       }
-      
-      responseObject.add("message", "Bewoner aangemaakt en toegevoegd!");
+
     } catch (Exception e) {
-      responseObject.add("message", "Error: " + e.getMessage());
+      return Response.status(409).entity("Bewoner niet aangemaakt!").build();
     }
-    return responseObject.build().toString();
+    return Response.ok(newBewoner.toString()).build();
   }
 }

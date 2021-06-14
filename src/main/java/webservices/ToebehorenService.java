@@ -9,19 +9,20 @@ import javax.json.JsonReader;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 import model.Aquarium;
 import model.AquariumManager;
 import model.Toebehoren;
 
 @Path("/toebehoren")
-public class ToebehorenDAO {
+public class ToebehorenService {
 
   @POST
   @Produces("application/json")
-  public String createToebehoren(String jsonBody) {
+  public Response createToebehoren(String jsonBody) {
     AquariumManager am = AquariumManager.getInstance();
-    JsonObjectBuilder responseObject = Json.createObjectBuilder();
+    Toebehoren newToebehoren = null;
     try {
       StringReader strReader = new StringReader(jsonBody);
       JsonReader jsonReader = Json.createReader(strReader);
@@ -32,7 +33,7 @@ public class ToebehorenDAO {
       String tOmschrijving = jsonObject.getString("tOmschrijving");
       String aqNaam = jsonObject.getString("aqNaam");
       
-      Toebehoren newToebehoren = new Toebehoren(tModel, tSerienummer, tOmschrijving);
+      newToebehoren = new Toebehoren(tModel, tSerienummer, tOmschrijving);
       
       for (Aquarium a : am.getAquariumLijst()) {
         if (a.getNaam().equals(aqNaam)) {
@@ -40,11 +41,10 @@ public class ToebehorenDAO {
           am.voegToebehorenToe(newToebehoren);
         }
       }
-      responseObject.add("message", "Toebehoren aangemaakt en toegevoegd!");
     } catch (Exception e) {
-      responseObject.add("message", "Error: " + e.getMessage());
+      return Response.status(409).entity("Toebehoren niet aangemaakt!").build();
     }
-    return responseObject.build().toString();
+    return Response.ok(newToebehoren.toString()).build();
   }
 
 }

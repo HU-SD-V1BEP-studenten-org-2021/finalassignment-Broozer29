@@ -82,7 +82,7 @@ public class JunitTestSuite {
     Aquarium nieuwAquariumTwee = new Aquarium("NaamTwee", 10, 10, 10, "bodemsoort", "watersoort");
     am.voegAquariumToe(nieuwAquariumTwee);
     assertEquals(am.getAquariumLijst().size(), 2);
-    am.verwijderAquarium(nieuwAquariumTwee);
+    am.verwijderAquarium("NaamTwee");
     assertEquals(am.getAquariumLijst().size(), 1);
   }
   

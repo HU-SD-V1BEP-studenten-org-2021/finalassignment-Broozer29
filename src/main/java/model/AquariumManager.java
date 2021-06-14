@@ -57,12 +57,12 @@ public final class AquariumManager {
     }
   }
 
-  public void verwijderAquarium(Aquarium aquarium) {
+  public void verwijderAquarium(String aquarium) {
     Aquarium aquariumToRemove = null;
     boolean removeAquarium = false;
 
     for (Aquarium a : aquariumLijst) {
-      if (a.getNaam().equals(aquarium.getNaam())) {
+      if (a.getNaam().equals(aquarium)) {
         removeAquarium = true;
         aquariumToRemove = a;
       }

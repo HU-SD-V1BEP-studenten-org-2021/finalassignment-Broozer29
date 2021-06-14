@@ -8,24 +8,25 @@ import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonReader;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 import model.Aquarium;
 import model.AquariumManager;
 import model.Bewoner;
-import model.Eigenaar;
 import model.Ornament;
 import model.Toebehoren;
 
 @Path("/aquarium")
-public class AquariumDAO {
+public class AquariumService {
 
   @GET
   @Produces("application/json")
-  public String getOrders() {
+  public Response getAquariums() {
     AquariumManager am = AquariumManager.getInstance();
     JsonArrayBuilder jab = Json.createArrayBuilder();
     JsonObjectBuilder job = Json.createObjectBuilder();
@@ -48,15 +49,14 @@ public class AquariumDAO {
     }
 
     JsonArray array = jab.build();
-    return array.toString();
+    return Response.ok(array.toString()).build();
   }
 
   @POST
   @Produces("application/json")
-  public String createAquarium(String jsonBody) {
+  public Response createAquarium(String jsonBody) {
     AquariumManager am = AquariumManager.getInstance();
-    JsonObjectBuilder responseObject = Json.createObjectBuilder();
-    System.out.println("Ontvangen!");
+    Aquarium newAquarium = null;
     try {
       StringReader strReader = new StringReader(jsonBody);
       JsonReader jsonReader = Json.createReader(strReader);
@@ -67,15 +67,31 @@ public class AquariumDAO {
       int aqHoogte = jsonObject.getInt("aqHoogte");
       String aqBodemsoort = jsonObject.getString("aqBodemsoort");
       String aqWatersoort = jsonObject.getString("aqWatersoort");
-      Aquarium newAquarium = new Aquarium(aqNaam, aqLengte, aqBreedte, aqHoogte, aqBodemsoort, aqWatersoort);
+      newAquarium = new Aquarium(aqNaam, aqLengte, aqBreedte, aqHoogte, aqBodemsoort, aqWatersoort);
       am.voegAquariumToe(newAquarium);
-      responseObject.add("message", "Aquarium gemaakt!");
     } catch (Exception e) {
-      responseObject.add("message", "Error: " + e.getMessage());
+      return Response.status(409).entity("Aquarium niet aangemaakt!").build();
     }
-    return responseObject.build().toString();
+    return Response.ok(newAquarium.toString()).build();
   }
 
+  @DELETE
+  @Produces("application/json")
+  public Response deleteAquarium(String jsonBody) {
+    AquariumManager am = AquariumManager.getInstance();
+    
+    try {
+      StringReader strReader = new StringReader(jsonBody);
+      JsonReader jsonReader = Json.createReader(strReader);
+      JsonObject jsonObject = jsonReader.readObject();
+      String aqNaam = jsonObject.getString("aqNaam");
+      
+      am.verwijderAquarium(aqNaam);
+    } catch (Exception e) {
+      return Response.status(409).entity("Aquarium kon niet verwijderd worden!").build();
+    }
+    return Response.ok("Aquarium succesvol verwijderd!").build();
+  }
 }
 
 /*
