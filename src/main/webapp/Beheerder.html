@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+function testPromote(){
+	var formData = new FormData(document.querySelector("#promoteForm"));
+	var encData = new URLSearchParams(formData);
+	let fetchOptions = {
+			method: "POST",
+			body: new URLSearchParams(formData),
+			headers: {'Authorization' : 'Bearer ' + window.sessionStorage.getItem("myJWT")}
+	}
+
+	fetch("restservices/ownerservice", fetchOptions)
+		.then(function(response) {
+			if(response.ok) {
+				console.log(response);
+			    return response.json();
+            }
+			else throw "Something went wrong";
+		})
+		.catch(error => console.log(error));
+}
+</script>
+
+<form id = "promoteForm" onsubmit = "testPromote()">
+  <label for="username">User to promote: </label><br>
+  <input type="text" id="username" name="username"><br><br>
+  <input type="submit" value="promote" id = "promote">
+</form> 
+
+<br>
+<form action = "NavigationPage.html">
+	<input type = "submit" value = "Terug" />
+</form>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Maak een bewoner aan</title>
+</head>
+<body>
+
+<script>
+function maakBewoner(){
+	var formData = new FormData(document.querySelector("#bewonerForm"));
+	var encData = new URLSearchParams(formData);
+	
+	let fetchOptions = {
+			method: "POST",
+			body: new URLSearchParams(formData),
+			headers: {'Authorization' : 'Bearer ' + window.sessionStorage.getItem("myJWT")}
+	}
+	
+	fetch("restservices/bewoner", fetchOptions)
+		.then(function(response) {
+			if(response.ok) {
+				console.log(response);
+			    return response.json();
+            }
+			else throw "Wrong data given";
+		})
+		.catch(error => console.log(error));
+}
+</script>    
+    
+<form id = "bewonerForm" onsubmit = "maakBewoner()">
+  <label for="bSoortNaam">Bewoner Soort Naam:</label><br>
+  <input type="text" id="bSoortNaam" name="bSoortNaam"><br>
+  <label for="bKleurnaam">Bewoner Kleur Naam:</label><br>
+  <input type="text" id="bKleurnaam" name="bKleurnaam"><br>
+  <label for="bAantal">Bewoner Aantal:</label><br>
+  <input type="number" id="bAantal" name="bAantal"><br>
+  <label for="bGroepsdier">Groepsdier:</label><br>
+  <input type="text" id="bGroepsdier" name="bGroepsdier"><br>  
+  <label for="bType">Type:</label><br>
+  <input type="text" id="bType" name="bType"><br>  
+  <label for="aqNaam">Aquarium naam:</label><br>
+  <input type="text" id="aqNaam" name="aqNaam"><br>  
+  
+  <input type="submit" value="Maak Bewoner" id = "Maak Bewoner">
+</form> 
+
+<form action = "NavigationPage.html">
+	<input type = "submit" value = "Terug" />
+</form>
+</body>
+</html>

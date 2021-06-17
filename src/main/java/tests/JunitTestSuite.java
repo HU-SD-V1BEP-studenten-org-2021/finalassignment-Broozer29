@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 import model.Aquarium;
 import model.AquariumManager;
 import model.Bewoner;
-import model.Eigenaar;
 import model.Ornament;
 import model.Toebehoren;
+import model.User;
 
 public class JunitTestSuite {
 
@@ -17,16 +17,16 @@ public class JunitTestSuite {
   @Test
   void testEigenaar() {
     //Test het maken van een eigenaar. Voeg hem 2x toe en controleer of hij maar 1x in de lijst staat.
-    Eigenaar nieuweEigenaar = new Eigenaar("Bruus", "Riezebos");
+    User nieuweEigenaar = new User("Bruus", "Riezebos", "Eigenaar");
     AquariumManager am = AquariumManager.getInstance();
     
-    am.voegEigenaarToe(nieuweEigenaar);
-    am.voegEigenaarToe(nieuweEigenaar);
-    assertEquals(am.getEigenaarLijst().size(), 1);
+    am.voegUserToe(nieuweEigenaar);
+    am.voegUserToe(nieuweEigenaar);
+    assertEquals(am.getUserLijst().size(), 1);
     
     //Test het verwijderen van de eigenaar
-    am.verwijderEigenaar(nieuweEigenaar);
-    assertEquals(am.getEigenaarLijst().size(), 0);
+    am.verwijderUser(nieuweEigenaar);
+    assertEquals(am.getUserLijst().size(), 0);
   }
   
   @Test

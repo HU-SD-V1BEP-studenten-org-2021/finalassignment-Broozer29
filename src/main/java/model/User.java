@@ -1,9 +1,13 @@
 package model;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+import javax.annotation.security.DeclareRoles;
+
+
+public class User implements Principal{
   private String userName;
   private String userPassword;
   private String role;
@@ -24,7 +28,7 @@ public class User {
     return null;
   }
 
-  public static void registerUser(User user) {
+  public static boolean registerUser(User user) {
     boolean voegUserToe = true;
     for (User u : userList) {
       if (u.getUserName().equals(user.getUserName())) {
@@ -34,6 +38,8 @@ public class User {
     if (voegUserToe) {
       User.userList.add(user);
     }
+    
+    return voegUserToe;
   }
   
   public static User getSpecificUser(String username) {
@@ -67,5 +73,10 @@ public class User {
 
   public void setRole(String role) {
     this.role = role;
+  }
+
+  @Override
+  public String getName() {
+    return this.userName;
   }
 }

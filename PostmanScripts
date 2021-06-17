@@ -1,0 +1,47 @@
+Hoe te gebruiken:
+Copy-paste het postman adres in de adres balk van postman.
+Als de gegevens omgeven zijn door een "{}" dan moet de data opgestuurd worden in een raw body.
+Als de gegevens onder elkaar staan zonder "{}" dan moet de data opgestuurd worden via een x-www-form-urlencoded. Ga naar rechts voor een "Bulk Edit" en copy-paste de gegevens.
+
+
+
+Aanmaken account:
+Postman Adres: http://localhost:8080/fishy-system/restservices/login
+{"username" : "Bruus", "password" : "Riezebos", "register" : "true"}
+
+Inloggen account:
+Postman Adres: http://localhost:8080/fishy-system/restservices/login
+{"username" : "Bruus", "password" : "Riezebos", "register" : "false"}
+
+Aanmaken Aquarium:
+Postman Adres: http://localhost:8080/fishy-system/restservices/aquarium
+aqNaam:Mijn Aquarium
+aqLengte:10
+aqBreedte:10
+aqHoogte:10
+aqBodemsoort:Zand
+aqWatersoort:Nat
+
+Aanmaken Bewoner:
+Postman Adres: http://localhost:8080/fishy-system/restservices/bewoner
+bSoortnaam:Vis
+bKleurnaam:Rood
+bAantal:10
+bGroepsdier:true
+bType:Nat?
+aqNaam:Mijn Aquarium
+
+Aanmaken Toebehoren:
+Postman Adres: http://localhost:8080/fishy-system/restservices/toebehoren
+tModel:Model
+tSerienummer:101011
+tOmschrijving:Omschrijving
+aqNaam:Mijn Aquarium
+
+Aanmaken Ornament:
+Postman Adres: http://localhost:8080/fishy-system/restservices/ornament
+oNaam:Ornament Naam
+oOmschrijving:Omschrijving
+oKleur:Rood
+oKanopluchtpomp:true
+aqNaam:Mijn Aquarium

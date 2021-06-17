@@ -14,7 +14,6 @@ public class Aquarium {
   private List<Bewoner> bewonerLijst = new ArrayList<Bewoner>();
   private List<Toebehoren> toebehorenLijst = new ArrayList<Toebehoren>();
 
-
   public Aquarium(String naam, int lengte, int breedte, int hoogte, String bodemsoort, String watersoort) {
     this.naam = naam;
     this.lengte = lengte;
@@ -83,8 +82,8 @@ public class Aquarium {
       this.ornamentenLijst.add(ornament);
     }
   }
-  
-  public List<Ornament> getOrnamentLijst(){
+
+  public List<Ornament> getOrnamentLijst() {
     return ornamentenLijst;
   }
 
@@ -96,6 +95,7 @@ public class Aquarium {
     boolean dubbel = false;
     for (Bewoner b : bewonerLijst) {
       if (b.getSoortNaam().equals(bewoner.getSoortNaam()) && b.getKleurNaam().equals(bewoner.getKleurNaam())) {
+        b.setAantal(b.getAantal()+1);
         dubbel = true;
       }
     }
@@ -103,7 +103,6 @@ public class Aquarium {
       this.bewonerLijst.add(bewoner);
     }
   }
-  
 
   public List<Toebehoren> getToebehorenLijst() {
     return toebehorenLijst;
@@ -127,5 +126,4 @@ public class Aquarium {
         + watersoort + ", ornamentenLijst=" + ornamentenLijst + ", bewonerLijst=" + bewonerLijst + ", toebehorenLijst=" + toebehorenLijst + "]";
   }
 
-  
 }

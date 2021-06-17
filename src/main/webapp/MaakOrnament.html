@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Maak een bewoner aan</title>
+</head>
+<body>
+
+<script>
+function maakOrnament(){
+	var formData = new FormData(document.querySelector("#ornamentForm"));
+	var encData = new URLSearchParams(formData);
+	
+	let fetchOptions = {
+			method: "POST",
+			body: new URLSearchParams(formData),
+			headers: {'Authorization' : 'Bearer ' + window.sessionStorage.getItem("myJWT")}
+	}
+	
+	fetch("restservices/ornament", fetchOptions)
+		.then(function(response) {
+			if(response.ok) {
+				console.log(response);
+			    return response.json();
+            }
+			else throw "Wrong data given";
+		})
+		.catch(error => console.log(error));
+}
+</script>    
+    
+<form id = "ornamentForm" onsubmit = "maakOrnament()">
+  <label for="oNaam">Naam:</label><br>
+  <input type="text" id="oNaam" name="oNaam"><br>
+  
+  <label for="oOmschrijving">Omschrijving:</label><br>
+  <input type="text" id="oOmschrijving" name="oOmschrijving"><br>
+  
+  <label for="oKleur">Kleur:</label><br>
+  <input type="text" id="oKleur" name="oKleur"><br>
+  
+  <label for="oKanopluchtpomp">Kan op lucht pomp (true/false):</label><br>
+  <input type="text" id="oKanopluchtpomp" name="oKanopluchtpomp"><br>
+  
+  <label for="aqNaam">Aquarium Naam:</label><br>
+  <input type="text" id="aqNaam" name="aqNaam"><br>
+  
+  <input type="submit" value="Maak Ornament" id = "Maak Ornament">
+</form> 
+
+<form action = "NavigationPage.html">
+	<input type = "submit" value = "Terug" />
+</form>
+</body>
+</html>

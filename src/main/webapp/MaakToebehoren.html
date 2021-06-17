@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Maak een bewoner aan</title>
+</head>
+<body>
+
+<script>
+function maakToebehoren(){
+	var formData = new FormData(document.querySelector("#toebehorenForm"));
+	var encData = new URLSearchParams(formData);
+	let fetchOptions = {
+			method: "POST",
+			body: new URLSearchParams(formData),
+			headers: {'Authorization' : 'Bearer ' + window.sessionStorage.getItem("myJWT")}
+	}
+	fetch("restservices/toebehoren", fetchOptions)
+		.then(function(response) {
+			if(response.ok) {
+				console.log(response);
+			    return response.json();
+            }
+			else throw "Wrong data given";
+		})
+		.catch(error => console.log(error));
+}
+</script>    
+    
+<form id = "toebehorenForm" onsubmit = "maakToebehoren()">
+  <label for="tModel">Model:</label><br>
+  <input type="text" id="tModel" name="tModel"><br>
+  
+  <label for="tSerienummer">Serienummer:</label><br>
+  <input type="number" id="tSerienummer" name="tSerienummer"><br>
+  
+  <label for="tOmschrijving">Omschrijving:</label><br>
+  <input type="text" id="tOmschrijving" name="tOmschrijving"><br>
+  
+  <label for="aqNaam">Aquarium Naam:</label><br>
+  <input type="text" id="aqNaam" name="aqNaam"><br>
+  
+  <input type="submit" value="Maak Toebehoren" id = "Maak Toebehoren">
+</form> 
+
+<form action = "NavigationPage.html">
+	<input type = "submit" value = "Terug" />
+</form>
+</body>
+</html>

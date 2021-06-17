@@ -5,6 +5,65 @@
     <title>Placeholder startpagina</title>
 </head>
 <body>
-<!-- your HTML starts here -->
+    <h1> Log-in of Registeer een account</h1>
+<script>
+function testLogin(){
+	var formData = new FormData(document.querySelector("#loginform"));
+	var encData = new URLSearchParams(formData);
+	
+	fetch("restservices/login", { method: 'POST', body: encData})
+		.then(function(response) {
+			if(response.ok) {
+				console.log(response);
+			    return response.json();
+            }
+			else throw "Wrong username/password";
+		})
+		.then(myJson => {
+		    window.sessionStorage.setItem("myJWT", myJson.JWT)
+		    location.href = "/fishy-system/NavigationPage.html"
+		    })
+		.catch(error => console.log(error));
+}
+
+
+function testRegister(){
+	var formData = new FormData(document.querySelector("#registerForm"));
+	var encData = new URLSearchParams(formData);
+	
+	fetch("restservices/login/register", { method: 'POST', body: encData})
+		.then(function(response) {
+			if(response.ok) {
+				console.log(response);
+			    return response.json();
+            }
+			else throw "Wrong data given or user exists";
+		})
+		.catch(error => console.log(error));
+}
+</script>    
+<div> Javascript werkt voor geen meter, inloggen/het aanmaken van objecten uit het domein model kan meerdere pogingen vereisen. Foutmeldingen zijn alleen weergeven in de console. Als er een fetch error staat, dan moet het opnieuw geprobeerd worden</div>    
+<form id = "loginform" onsubmit = "testLogin()">
+  <label for="username">First name:</label><br>
+  	<input type="text" id="username" name="username"><br>
+  <label for="password">Password:</label><br>
+  	<input type="text" id="password" name="password"><br>
+  <input type="submit" value="login" id = "login">
+</form>
+<br><br><br><br>
+
+<form id = "registerForm" onsubmit = "testRegister()">
+  <label for="username">First name:</label><br>
+  	<input type="text" id="username" name="username"><br>
+  <label for="password">Password:</label><br>
+  	<input type="text" id="password" name="password"><br>
+  <input type="submit" value="register" id = "register">
+</form>
+<br>
+
+<form action = "NavigationPage.html">
+	<input type = "submit" value = "Terug" />
+</form>
+
 </body>
 </html>

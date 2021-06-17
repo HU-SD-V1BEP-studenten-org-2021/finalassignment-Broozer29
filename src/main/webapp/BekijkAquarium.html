@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Alle aquaria</title>
+</head>
+<body onload = "haalAquariumsOp()">
+
+<p id="p1">Aquariums: <br></p>
+
+<form action = "NavigationPage.html">
+	<input type = "submit" value = "Terug" />
+</form>
+
+<script>
+function haalAquariumsOp(){
+	var fetchoptions = {
+			method: "GET"
+	}
+	 fetch("restservices/aquarium", fetchoptions)
+	 .then(res => res.json())
+	 .then(data => {
+	 	for (klaas of data){
+	 		console.log(klaas)
+	 		document.getElementById("p1").innerHTML += "Naam: " + klaas.Naam + "  ";
+	 		document.getElementById("p1").innerHTML += "Bewoner: " + klaas.Bewoner + "  ";
+	 		document.getElementById("p1").innerHTML += "Ornament: " + klaas.Ornament + "  ";
+	 		document.getElementById("p1").innerHTML += "Toebehoren: " + klaas.Toebehoren + "  ";
+	 	}
+	 });
+}
+</script>
+</body>
+</html>

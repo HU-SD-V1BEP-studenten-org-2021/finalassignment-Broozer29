@@ -6,7 +6,7 @@ public final class AquariumManager {
   private static AquariumManager INSTANCE;
   private String installatieNaam;
   private ArrayList<Toebehoren> toebehorenLijst = new ArrayList<>();
-  private ArrayList<Eigenaar> eigenaarLijst = new ArrayList<>();
+  private ArrayList<User> UserLijst = new ArrayList<>();
   private ArrayList<Bewoner> bewonerLijst = new ArrayList<>();
   private ArrayList<Aquarium> aquariumLijst = new ArrayList<>();
 
@@ -15,14 +15,18 @@ public final class AquariumManager {
 
   public static AquariumManager getInstance() {
     if (INSTANCE == null) {
+      User beheerderUser = new User("Bruus", "Password", "Beheerder");
+      User testUserToPromote = new User("Dummy", "DummyPassword", "User");
       INSTANCE = new AquariumManager();
+      INSTANCE.voegUserToe(beheerderUser);
+      User.registerUser(beheerderUser);
+      User.registerUser(testUserToPromote);
     }
-
     return INSTANCE;
   }
 
-  public ArrayList<Eigenaar> getEigenaarLijst() {
-    return this.eigenaarLijst;
+  public ArrayList<User> getUserLijst() {
+    return this.UserLijst;
   }
 
   public ArrayList<Bewoner> getBewonerLijst() {
@@ -101,32 +105,32 @@ public final class AquariumManager {
     }
   }
 
-  public void voegEigenaarToe(Eigenaar eigenaar) {
+  public void voegUserToe(User eigenaar) {
     boolean dubbel = false;
 
-    for (Eigenaar e : eigenaarLijst) {
-      if (e.getVoornaam().equals(eigenaar.getVoornaam()) || e.getAchternaam().equals(eigenaar.getAchternaam())) {
+    for (User e : UserLijst) {
+      if (e.getUserName().equals(eigenaar.getUserName())) {
         dubbel = true;
       }
     }
     if (!dubbel) {
-      this.eigenaarLijst.add(eigenaar);
+      this.UserLijst.add(eigenaar);
     }
   }
 
-  public void verwijderEigenaar(Eigenaar eigenaar) {
-    Eigenaar eigenaarToRemove = null;
-    boolean removeEigenaar = false;
+  public void verwijderUser(User userToRemove) {
+    User userToRemoveV = null;
+    boolean removeUser = false;
 
-    for (Eigenaar e : eigenaarLijst) {
-      if (e.getVoornaam().equals(eigenaar.getVoornaam()) && e.getAchternaam().equals(eigenaar.getAchternaam())) {
-        removeEigenaar = true;
-        eigenaarToRemove = e;
+    for (User e : UserLijst) {
+      if (e.getUserName().equals(userToRemoveV.getUserName())) {
+        removeUser = true;
+        userToRemoveV = e;
       }
     }
 
-    if (removeEigenaar) {
-      eigenaarLijst.remove(eigenaarToRemove);
+    if (removeUser) {
+      UserLijst.remove(userToRemoveV);
     }
   }
 
