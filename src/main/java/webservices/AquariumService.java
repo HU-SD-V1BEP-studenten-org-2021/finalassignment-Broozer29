@@ -70,6 +70,9 @@ public class AquariumService {
     AquariumManager am = AquariumManager.getInstance();
     Aquarium newAquarium = null;
     try {
+      if (aqLengte < 1 || aqBreedte < 1 || aqHoogte < 1) {
+        return Response.status(409).entity("Aquarium niet aangemaakt, alsjeblieft alleen positieve getallen").build();
+      }
       newAquarium = new Aquarium(aqNaam, aqLengte, aqBreedte, aqHoogte, aqBodemsoort, aqWatersoort);
       am.voegAquariumToe(newAquarium);
     } catch (Exception e) {

@@ -15,14 +15,30 @@ public final class AquariumManager {
 
   public static AquariumManager getInstance() {
     if (INSTANCE == null) {
-      User beheerderUser = new User("Bruus", "Password", "Beheerder");
-      User testUserToPromote = new User("Dummy", "DummyPassword", "User");
       INSTANCE = new AquariumManager();
-      INSTANCE.voegUserToe(beheerderUser);
-      User.registerUser(beheerderUser);
-      User.registerUser(testUserToPromote);
+      INSTANCE.generateObjects();
     }
     return INSTANCE;
+  }
+  
+  private void generateObjects() {
+    User beheerderUser = new User("Bruus", "Password", "Beheerder");
+    User testUserToPromote = new User("Dummy", "DummyPassword", "User");
+    voegUserToe(beheerderUser);
+    voegUserToe(testUserToPromote);
+    User.registerUser(beheerderUser);
+    User.registerUser(testUserToPromote);
+    
+    Aquarium aq = new Aquarium("Mijn Aquarium", 10, 10, 10, "Zand", "Nat");
+    voegAquariumToe(aq);
+    Ornament ornament = new Ornament("Ornament Naam", "Leuke Omschrijving", "Oranje", false);
+    aq.voegOrnamentToe(ornament);
+    Bewoner bewoner = new Bewoner("Soortnaam", "Kleurnaam", 1, true, "Bewoner Type");
+    aq.voegBewonerToe(bewoner);
+    voegBewonerToe(bewoner);
+    Toebehoren toebehoren = new Toebehoren("Model Naam", 1010101, "Omschrijving");
+    aq.voegToebehorenToe(toebehoren);
+    voegToebehorenToe(toebehoren);
   }
 
   public ArrayList<User> getUserLijst() {

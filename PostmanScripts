@@ -7,11 +7,16 @@ Als de gegevens onder elkaar staan zonder "{}" dan moet de data opgestuurd worde
 
 Aanmaken account:
 Postman Adres: http://localhost:8080/fishy-system/restservices/login
-{"username" : "Bruus", "password" : "Riezebos", "register" : "true"}
+username: Bruus
+password: Riezebos
+register: true
+
 
 Inloggen account:
 Postman Adres: http://localhost:8080/fishy-system/restservices/login
-{"username" : "Bruus", "password" : "Riezebos", "register" : "false"}
+username: Bruus
+password: Riezebos
+register: false
 
 Aanmaken Aquarium:
 Postman Adres: http://localhost:8080/fishy-system/restservices/aquarium

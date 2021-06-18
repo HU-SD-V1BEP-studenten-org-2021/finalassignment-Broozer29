@@ -30,6 +30,9 @@ public class BewonerService {
     }
     Bewoner newBewoner = null;
     try {
+      if (bAantal < 1) {
+        return Response.status(409).entity("Bewoner niet aangemaakt, alsjeblieft een positief getal").build();
+      }
       newBewoner = new Bewoner(bSoortnaam, bKleurnaam, bAantal, bGroepsdier, bType);
       AquariumManager am = AquariumManager.getInstance();
       for (Aquarium aq : am.getAquariumLijst()) {

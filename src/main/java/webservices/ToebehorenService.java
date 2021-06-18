@@ -30,6 +30,9 @@ public class ToebehorenService {
     AquariumManager am = AquariumManager.getInstance();
     Toebehoren newToebehoren = null;
     try {
+      if (tSerienummer < 1) {
+        return Response.status(409).entity("Toebehoren niet aangemaakt, alsjeblieft alleen een getal boven de 0").build();
+      }
       newToebehoren = new Toebehoren(tModel, tSerienummer, tOmschrijving);
       for (Aquarium a : am.getAquariumLijst()) {
         if (a.getNaam().equals(aqNaam)) {

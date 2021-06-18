@@ -42,7 +42,9 @@ function testRegister(){
 		.catch(error => console.log(error));
 }
 </script>    
-<div> Javascript werkt voor geen meter, inloggen/het aanmaken van objecten uit het domein model kan meerdere pogingen vereisen. Foutmeldingen zijn alleen weergeven in de console. Als er een fetch error staat, dan moet het opnieuw geprobeerd worden</div>    
+<div> Javascript werkt voor geen meter, inloggen/het aanmaken van objecten uit het domein model kan meerdere pogingen vereisen. Foutmeldingen zijn alleen weergeven in de console. Als er een fetch error staat, dan moet het opnieuw geprobeerd worden</div>  
+<br>
+<div> Informatie handig voor testen: Er zijn 2 accounts gemaakt. Een gebruiker en een beheerder. <br> De beheerder gegevens zijn: Bruus en Password <br> De gebruikers gegevens zijn Dummy en DummyPassword</div>  
 <form id = "loginform" onsubmit = "testLogin()">
   <label for="username">First name:</label><br>
   	<input type="text" id="username" name="username"><br>
@@ -62,7 +64,7 @@ function testRegister(){
 <br>
 
 <form action = "NavigationPage.html">
-	<input type = "submit" value = "Terug" />
+	<input type = "submit" value = "Navigation Page" />
 </form>
 
 </body>
