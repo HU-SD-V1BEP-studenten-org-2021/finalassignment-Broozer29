@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Maak een aquarium aan</title>
+</head>
+<body>
+
+<script>
+function maakAquarium(){
+	var formData = new FormData(document.querySelector("#aquariumForm"));
+	var encData = new URLSearchParams(formData);
+	let fetchOptions = {
+			method: "POST",
+			body: new URLSearchParams(formData),
+			headers: {'Authorization' : 'Bearer ' + window.sessionStorage.getItem("myJWT")}
+	}
+	fetch("restservices/aquarium", fetchOptions)
+		.then(function(response) {
+			if(response.ok) {
+				console.log(response);
+			    return response.json();
+            }
+			else throw "Wrong data given";
+		})
+		.catch(error => console.log(error));
+}
+</script>    
+    
+<form id = "aquariumForm" onsubmit = "maakAquarium()">
+  <label for="aqNaam">Aquarium Naam:</label><br>
+  <input type="text" id="aqNaam" name="aqNaam"><br>
+  <label for="aqLengte">Lengte:</label><br>
+  <input type="number" id="aqLengte" name="aqLengte"><br>
+  <label for="aqHoogte">Hoogte:</label><br>
+  <input type="number" id="aqHoogte" name="aqHoogte"><br>
+  <label for="aqBreedte">Breedte:</label><br>
+  <input type="number" id="aqBreedte" name="aqBreedte"><br>  
+  <label for="aqBodemsoort">Bodemsoort:</label><br>
+  <input type="text" id="aqBodemsoort" name="aqBodemsoort"><br>  
+  <label for="aqWatersoort">Watersoort:</label><br>
+  <input type="text" id="aqWatersoort" name="aqWatersoort"><br>  
+  <input type="submit" value="Maak Aquarium" id = "Maak Aquarium">
+</form> 
+
+<form action = "NavigationPage.html">
+	<input type = "submit" value = "Terug" />
+</form>
+</body>
+</html>

@@ -1,12 +1,14 @@
 package nl.hu.bep.setup;
 
-import org.glassfish.jersey.server.ResourceConfig;
-
 import javax.ws.rs.ApplicationPath;
+
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
 @ApplicationPath("restservices")
 public class JerseyConfig extends ResourceConfig {
     public JerseyConfig() {
-        //@TODO koppel hier met je web-resource packages
+        packages("webservices, security");
+        register(RolesAllowedDynamicFeature.class);
     }
 }
